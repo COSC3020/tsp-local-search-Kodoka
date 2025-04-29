@@ -1,17 +1,40 @@
 function tsp_ls(distance_matrix)
 {
-    var route = [0, 1, 2, 3, 4]
-    var indices = [2, 3];
-    var newRoute = reverseRouteSegment(route, indices);
-    var newIndices = randomizeIndices(distance_matrix.length, indices);
-    var newerRoute = reverseRouteSegment(newRoute, newIndices);
-    console.log(JSON.stringify(routeLength(route, distance_matrix)));
-    console.log(JSON.stringify(route));
-    console.log(JSON.stringify(routeLength(newRoute, distance_matrix)));
-    console.log(JSON.stringify(newRoute));
-    console.log(JSON.stringify(routeLength(newerRoute, distance_matrix)));
-    console.log(JSON.stringify(newerRoute));
-    return -1;
+    var swapsWOImprovement = 0;
+    var maxSwapsWOImprovement = 50;
+    // Default route is indices of dimensions of input distance_matrix.
+    var route = [...Array(distance_matrix.length).keys()];
+    // Shortest length defaults to default route's length.
+    var shortestLength = routeLength(route, distance_matrix);
+    var indices = randomizeIndices(distance_matrix.length, null);
+
+    // Keep looking for shorter routes, 'til a shorter route hasn't been found
+    // in some time.
+    while(swapsWOImprovement < maxSwapsWOImprovement)
+    {
+        var candidateRoute = reverseRouteSegment(route, indices);
+        var candidateLength = routeLength(candidateRoute, distance_matrix);
+
+        // If the new candidate route provides a better length, shorter,
+        // replace the old route and length.
+        if(candidateLength < shortestLength)
+        {
+            route = candidateRoute;
+            shortestLength = candidateLength;
+            swapsWOImprovement = 0;
+        }
+        // If no improvement is seen, incriment swapsWOImprovement.
+        else
+        {
+            swapsWOImprovement++;
+        }
+
+        indices = randomizeIndices(distance_matrix.length, indices);
+    }
+
+    // console.log(JSON.stringify(shortestLength));    // Remove
+    // console.log(JSON.stringify(route));             // Remove
+    return shortestLength;
 }
 
 // Provides the length of a proposed route, using a distance matrix.
@@ -59,16 +82,16 @@ function randomizeIndices(numCities, previousIndices)
         // The newSecond index can be any index between newFirst + 1, and the
         // number of cities.
         newSecond = Math.floor((Math.random() * (numCities - newFirst - 1)) + newFirst + 1);
-    } while(previousIndices[0] == newFirst && previousIndices[1] == newSecond)
+    } while(previousIndices && previousIndices[0] == newFirst && previousIndices[1] == newSecond)
 
     // Return the indices that will be swapped next.
     return [newFirst, newSecond];
 }
 
-dm = [[0,3,4,2,7],
-      [3,0,4,6,3],
-      [4,4,0,5,8],
-      [2,6,5,0,6],
-      [7,3,8,6,0]];
+// dm = [[0,3,4,2,7],
+//       [3,0,4,6,3],
+//       [4,4,0,5,8],
+//       [2,6,5,0,6],
+//       [7,3,8,6,0]];
 
-      tsp_ls(dm);
+// console.log(JSON.stringify(tsp_ls(dm)));
