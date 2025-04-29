@@ -1,7 +1,7 @@
 function tsp_ls(distance_matrix)
 {
     var swapsWOImprovement = 0;
-    var maxSwapsWOImprovement = 50;
+    var maxSwapsWOImprovement = 5;
     // Default route is indices of dimensions of input distance_matrix.
     var route = [...Array(distance_matrix.length).keys()];
     // Shortest length defaults to default route's length.
