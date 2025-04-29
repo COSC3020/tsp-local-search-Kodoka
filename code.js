@@ -1,5 +1,11 @@
 function tsp_ls(distance_matrix)
 {
+    // If theres less than 2 cities, the shortest length is 0.
+    if(distance_matrix.length < 2)
+    {
+        return 0;
+    }
+
     var swapsWOImprovement = 0;
     var maxSwapsWOImprovement = 5;
     // Default route is indices of dimensions of input distance_matrix.
