@@ -51,27 +51,27 @@ What is the worst-case asymptotic time complexity of your implementation? What
 is the worst-case asymptotic memory complexity? Add your answer, including your
 reasoning, to this markdown file.
 
-## My Runtime Complexity
+## My Runtime Complexity  
 
 There are two processes in my code whose performance in based on the input,
 where $n$ will represent the number of cities or nodes in the input distance
-matrix.
+matrix.  
 
 First routeLength iterates over cities in the route to calculate the length of
 the proposed route using the distances included in the distance_matrix. This
-runs in $\Theta(n)$.
+runs in $\Theta(n)$.  
 
 Next reverseRouteSegment iterates over the cities creating a new route using
-slice, reverse, and concat. This runs in $\Theta(n)$.
+slice, reverse, and concat. This runs in $\Theta(n)$.  
 
 These two processes are performed some constant number of time upper bounded by
-our 50 millisecond time limit. This runs in constant time, $\Theta(1)$.
+our 50 millisecond time limit. This runs in constant time, $\Theta(1)$.  
 
 Multiplying our constant number of loops, by the two processes: routeLength, and
 reverseRouteSegments, we get $\Theta(1)(\Theta(n) \cdot \Theta(n)) = \Theta(n)
-\cdot \Theta(n)$. Thus the worst case time complexity of my code is $\Theta(n)$.
+\cdot \Theta(n)$. Thus the worst case time complexity of my code is $\Theta(n)$.  
 
-## My Memory Complexity
+## My Memory Complexity  
 
 Not accounting for the $n \cdot n = n^2$ memory necessary to hold the input of
 distance_matrix, my code only requires extra space in two places. In the form of
@@ -81,8 +81,15 @@ further $n$ elements. Thus the worst case memory complexity of my code is
 $\Theta(n) + \Theta(n)$ or simply $\Theta(n)$ if we don't account for memory
 necessary for the input distance_matrix, or $\Theta(n^2) + \Theta(n) +
 \Theta(n)$ or simply $\Theta(n^2)$ if we do account for the memory necessary for
-the input distance_matrix.
+the input distance_matrix.  
 
-## Plagiarism Notice
+## Sources  
 
-I certify that I have listed all sources used to complete this exercise, including the use of any Large Language Models. All of the work is my own, except where stated otherwise. I am aware that plagiarism carries severe penalties and that if plagiarism is suspected, charges may be filed against me without prior notice.
+I used the LAU15 data from the following link during testnig for a larger test
+input:  
+
+https://people.sc.fsu.edu/~jburkardt/datasets/cities/cities.html  
+
+## Plagiarism Notice  
+
+I certify that I have listed all sources used to complete this exercise, including the use of any Large Language Models. All of the work is my own, except where stated otherwise. I am aware that plagiarism carries severe penalties and that if plagiarism is suspected, charges may be filed against me without prior notice.  
