@@ -50,3 +50,35 @@ Test your new function; I've provided some basic testing code in `code.test.js`.
 What is the worst-case asymptotic time complexity of your implementation? What
 is the worst-case asymptotic memory complexity? Add your answer, including your
 reasoning, to this markdown file.
+
+## My Runtime Complexity
+
+There are two processes in my code whose performance in based on the input,
+where $n$ will represent the number of cities or nodes in the input distance
+matrix.
+
+First routeLength iterates over cities in the route to calculate the length of
+the proposed route using the distances included in the distance_matrix. This
+runs in $\Theta(n)$.
+
+Next reverseRouteSegment iterates over the cities creating a new route using
+slice, reverse, and concat. This runs in $\Theta(n)$.
+
+These two processes are performed some constant number of time upper bounded by
+our 50 millisecond time limit. This runs in constant time, $\Theta(1)$.
+
+Multiplying our constant number of loops, by the two processes: routeLength, and
+reverseRouteSegments, we get $\Theta(1)(\Theta(n) \cdot \Theta(n)) = \Theta(n)
+\cdot \Theta(n)$. Thus the worst case time complexity of my code is $\Theta(n)$.
+
+## My Memory Complexity
+
+Not accounting for the $n \cdot n = n^2$ memory necessary to hold the input of
+distance_matrix, my code only requires extra space in two places. In the form of
+route, which throughout the runtime of my code holds an array of length $n$, and
+within reverseRouteSegment, where across three subarrays, we temporarily hold a
+further $n$ elements. Thus the worst case memory complexity of my code is
+$\Theta(n) + \Theta(n)$ or simply $\Theta(n)$ if we don't account for memory
+necessary for the input distance_matrix, or $\Theta(n^2) + \Theta(n) +
+\Theta(n)$ or simply $\Theta(n^2)$ if we do account for the memory necessary for
+the input distance_matrix.
